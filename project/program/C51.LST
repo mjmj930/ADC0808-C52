@@ -1,0 +1,92 @@
+C51 COMPILER V9.54   C51                                                                   06/12/2023 18:11:37 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE C51
+OBJECT MODULE PLACED IN C51.OBJ
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE C51.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg52.h>                      //单片机寄存器定义
+   2          #include <stdlib.h>                     //atoi头文件
+   3          #include <intrins.h>            //_nop_()头文件
+   4          #include "lcd1602.h"            //1602显示屏
+   5          #include "stdio.h"                      //C语言函数
+   6          #include "adc0808.h"
+   7          
+   8          uchar AD_Data;                                          //AD0808原始数据
+   9          uint Temp;                                                      //处理后的数据
+  10          int td;
+  11          int num;
+  12          char txt[15];
+  13          
+  14          
+  15          
+  16          
+  17          
+  18          void main()
+  19          {
+  20   1          int n = 0;
+  21   1          L1602_init(0);              //1实物焊接，0仿真
+  22   1          TimeInitial();
+  23   1      
+  24   1          while(1)
+  25   1          {
+  26   2              L1602_string(1, 8, "V");
+  27   2              //---------------ADC0808测数据-------------------------------
+  28   2              addselect(td);                                                          //选择通道0-7
+  29   2              if(num > 40)                                                                    //程序每50次循环，通道+1
+  30   2              {
+  31   3                  td++;
+  32   3                  if(td > 4)                                                          //0-7循环
+  33   3                      td = 0;
+  34   3                  num = 0;
+  35   3              }
+  36   2              else
+  37   2              {
+  38   3                  num++;
+  39   3              }
+  40   2              AD_Data = adc0808read();                                                //读取adc0809的数据，返回int类型变量
+  41   2              Temp = (AD_Data * 1.0 / 255 * 5) * 100;         //数据处理：输出值=输入值*5/255  参数5是基准电压5V
+  42   2              if(td == 0)
+  43   2              {
+  44   3                  sprintf(txt, "A:%d.%2d", Temp / 100, Temp % 100);
+  45   3                  L1602_string(1, 1, txt);
+  46   3              }
+  47   2              else if(td == 1)
+  48   2              {
+  49   3                  sprintf(txt, "B:%d.%2d", Temp / 100, Temp % 100);
+  50   3                  L1602_string(1, 1, txt);            //显示字符串
+  51   3              }
+  52   2              else if(td == 2)
+  53   2              {
+  54   3                  sprintf(txt, "C:%d.%2d", Temp / 100, Temp % 100);
+  55   3                  L1602_string(1, 1, txt);            //显示字符串
+C51 COMPILER V9.54   C51                                                                   06/12/2023 18:11:37 PAGE 2   
+
+  56   3              }
+  57   2              else if(td == 3)
+  58   2              {
+  59   3                  sprintf(txt, "D:%d.%2d", Temp / 100, Temp % 100);
+  60   3                  L1602_string(1, 1, txt);            //显示字符串
+  61   3              }
+  62   2      
+  63   2          }
+  64   1      }
+  65          
+  66          
+  67          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    647    ----
+   CONSTANT SIZE    =     38    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22      13
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

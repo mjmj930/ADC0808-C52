@@ -1,0 +1,31 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\wang\Desktop\c51\C51.uvproj
+Project File Date:  08/01/2022
+
+<h2>Output:</h2>
+compiling C51.c...
+C51.c - 0 Error(s), 0 Warning(s).
+compiling C51.c...
+C51.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_L1602_CHAR?C51
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD1602_SHOWNUM?C51
+Program Size: data=20.0 xdata=0 code=566
+creating hex file from "C51"...
+"C51" - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_L1602_CHAR?C51
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCD1602_SHOWNUM?C51
+Program Size: data=20.0 xdata=0 code=566
+creating hex file from "C51"...
+"C51" - 0 Error(s), 2 Warning(s).
